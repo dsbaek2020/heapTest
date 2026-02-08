@@ -72,7 +72,7 @@ uint8 sensor_temp1;  // 센서 데이터 저장 예시 변수
 
 
 /*
-  ┌─────────────┐      next      ┌─────────────┐      next      ┌─────────────┐
+  ┌─────────────┐      next     ┌─────────────┐      next     ┌─────────────┐
   │  ListNode   │──────────────→│  ListNode   │──────────────→│  ListNode   │→ NULL
   │  data, next │               │  data, next │               │  data, next │
   └─────────────┘               └─────────────┘               └─────────────┘
@@ -356,7 +356,7 @@ char List_readByIndex(List* list, int index) {
 void List_free(List* list) {
     ListNode* node = list->head;
     while (node) {
-        ListNode* next = node->next; // 다음 노드 미리 저장
+        ListNode* next = node->next; // (**)다음 노드 미리 저장(**)
         free(node);                  // 현재 노드 메모리 해제
         node = next;                 // 다음 노드로 이동
     }
@@ -620,6 +620,7 @@ void runTextEditorDemo(void) {
     printf("\n--- 메시지 입력 박스 시작! ---\n");
     TextBox textbox;
     TextBox_init(&textbox);
+    
     textbox.editLoop(&textbox);
     textbox.text.free(&textbox.text);
 }
